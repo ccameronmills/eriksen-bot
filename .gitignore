@@ -1,0 +1,8 @@
+### VSCode ###
+.vscode/*
+
+# Ignore config file which should contain credentials, template should be copied and used to setup
+default.cfg
+
+# Ignore stateful data
+data/*
