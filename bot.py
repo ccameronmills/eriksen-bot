@@ -16,8 +16,7 @@ MISSPELLINGS = [
     "erecksen",
     "ereksen"
     ]
-REPLY = "It's Eriksen, not {misspelling}!\n\n---\n\nI'm a bot and I've made {corrections} so far"
-SUBREDDIT = "reddevils"
+REPLY = "It's Eriksen, not {misspelling}!\n\n---\n\n*I'm a bot and I've made {corrections} corrections so far*"
 REPLY_ENABLED = True
 
 def main():
@@ -26,6 +25,7 @@ def main():
     config.read("default.cfg")
 
     username = config.get("Credentials", "username")
+    subreddit = config.get("General", "subreddit")
 
     reddit = praw.Reddit(
         user_agent = config.get("General", "user_agent"),
@@ -59,9 +59,8 @@ def main():
         if populated_replies > 0: print("Populated " + str(populated_replies) + " replies made from Reddit")
         
     print("Populated " + str(len(replied_to)) + " replies in set")
-    subreddit = reddit.subreddit(SUBREDDIT)
 
-    for comment in subreddit.stream.comments():
+    for comment in reddit.subreddit(subreddit).stream.comments():
         normalized_comment = comment.body.lower()
         parsed_date = datetime.utcfromtimestamp(comment.created_utc)
         #print("  " + parsed_date.strftime("%H:%M:%S") + ' - ' + comment.id + ' - ' + comment.body)

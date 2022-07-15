@@ -6,3 +6,6 @@ default.cfg
 
 # Ignore stateful data
 data/*
+
+# Ignore note files
+notes/*
